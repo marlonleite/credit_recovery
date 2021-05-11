@@ -45,13 +45,19 @@ INSTALLED_APPS = [
 
 # libs
 INSTALLED_APPS += [
-    "django_extensions",
     "rest_framework",
 ]
 
+# Dev libs
+if DEBUG:
+    INSTALLED_APPS += [
+        "django_extensions",
+    ]
+
 # apps
 INSTALLED_APPS += [
-    "core",
+    "customers",
+    "cases",
 ]
 
 MIDDLEWARE = [

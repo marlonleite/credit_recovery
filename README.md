@@ -6,6 +6,16 @@ Welcome! This is the repository of Credit Recovery API source code.
 
 To setup this project for local development, you have to download the repository, download the docker containers and load a database dump.
 
+### Poetry
+You can use Poetry to run the project. 
+More info about Poetry: <https://python-poetry.org/docs/>
+
+```
+python3 -m venv venv
+source venv/bin/activate
+poetry install
+```
+
 ### Fast setup
 1. Clone this repository in your machine.
 2. Navigate to the project folder on your local computer.

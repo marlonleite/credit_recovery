@@ -1,3 +1,4 @@
+# creditors and debtors.
 runserver:
 	python manage.py runserver 0.0.0.0:8000
 
@@ -19,3 +20,15 @@ black_reformat:
 
 shell:
 	DEBUG=true python manage.py shell_plus
+
+create_db:
+	psql -h db -U postgres postgres -c "CREATE DATABASE credit_db"
+
+drop_db:
+	psql -h db -U postgres postgres -c "DROP DATABASE credit_db"
+
+migrate:
+	python manage.py migrate
+
+create_admin:
+	python manage.py createsuperuser

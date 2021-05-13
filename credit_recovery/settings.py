@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 # libs
 INSTALLED_APPS += [
     "rest_framework",
+    "drf_yasg",
 ]
 
 # Dev libs
@@ -57,6 +58,7 @@ if DEBUG:
 # apps
 INSTALLED_APPS += [
     "customers",
+    "cases",
 ]
 
 MIDDLEWARE = [
@@ -147,10 +149,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # RestFramework
-
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+# SWAGGER
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {"basic": {"type": "basic"}},
 }
 
 # Default primary key field type

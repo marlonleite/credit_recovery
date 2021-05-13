@@ -1,7 +1,7 @@
 import validate_docbr as docbr
 from rest_framework import serializers
 
-from customers.models import Creditor, Debtor
+from customers.models import CreditorModel, DebtorModel
 
 
 class PersonSerializerMixin(serializers.ModelSerializer):
@@ -34,19 +34,22 @@ class PersonSerializerMixin(serializers.ModelSerializer):
         if not value.isnumeric():
             raise serializers.ValidationError(f"This phone '{value}' is numeric.")
         elif len(value) not in [11]:
-            raise serializers.ValidationError(
-                f"This phone '{value}' has 11 digits. Ex: 01234567890"
-            )
+            raise serializers.ValidationError(f"This phone '{value}' is invalid size.")
         return value
 
 
 class CreditorSerializer(PersonSerializerMixin):
     class Meta:
-        model = Creditor
+        model = CreditorModel
         fields = "__all__"
+
+    def create(self, validated_data):
+        print(validated_data)
+        instance = self.Meta.model.objects.create(**validated_data)
+        return instance
 
 
 class DebtorSerializer(PersonSerializerMixin):
     class Meta:
-        model = Debtor
+        model = DebtorModel
         fields = "__all__"

@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from customers.models import CreditorModel, DebtorModel
+
+admin.site.register(CreditorModel)
+admin.site.register(DebtorModel)

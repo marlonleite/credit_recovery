@@ -54,10 +54,18 @@ class TestDebtorEndpoints:
         assert response.status_code == 400
         assert response.json() == {"phone": ["This phone '123456789' is invalid size."]}
 
+    def test_successful__update(self):
+        model = baker.make(DebtorModel, name="Test Name")
+        data = {"name": "Other Test Name"}
+        response = self.client.patch(
+            f"{self.endpoint}{model.id}/", data=data, format="json"
+        )
+        assert response.status_code == 200
+        assert response.json()["name"] == "Other Test Name"
+
     def test_delete(self, mocker):
         model = baker.make(DebtorModel)
         response = self.client.delete(f"{self.endpoint}{model.id}/")
-
-        DebtorModel.objects.filter(id=model.id).first()
-
+        debtor = DebtorModel.objects.filter(id=model.id).first()
         assert response.status_code == 204
+        assert debtor is None

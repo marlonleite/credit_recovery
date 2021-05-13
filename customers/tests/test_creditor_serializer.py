@@ -1,7 +1,6 @@
 import pytest
 
 from customers.serializers import CreditorSerializer
-from customers.tests.factories import CreditorFactory
 
 
 @pytest.mark.django_db

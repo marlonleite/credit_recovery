@@ -1,8 +1,6 @@
 import pytest
 from rest_framework.test import APIClient
 
-from customers.tests.factories import CreditorFactory
-
 
 @pytest.fixture
 def api_client():

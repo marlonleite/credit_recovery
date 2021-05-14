@@ -77,7 +77,7 @@ docker-compose down
 ```
 docker-compose up -d
 ```
-8. Good, go to Credit Recovery API url:
+8. Good, go to Credit Recovery API Swagger Dashboard API url:
 ```
 http://0.0.0.0:8000/
 ```
@@ -94,6 +94,15 @@ or
 ```
 pytest path/app/test
 ```
+
+### Project Demo
+To use the demo project access the follow url:
+
+<http://creditrecovery.marlonleite.com.br>
+
+authenticate with user authorization:
+`user: admin`
+`pass: 123456`
 
 ### Author
 Marlon Leite - <https://github.com/marlonleite/>

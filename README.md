@@ -2,9 +2,18 @@
 
 Welcome! This is the repository of Credit Recovery API source code.
 
+### Features
+- You can consult Credit recovery cases;
+- You can consult creditos and debtors users.
+
+### Requirements
+
+- Python 3
+- Django 3
+
 ### Development setup
 
-To setup this project for local development, you have to download the repository, download the docker containers and load a database dump.
+To setup this project for local development, you have to download the repository and download the docker containers.
 
 ### Poetry
 You can use Poetry to run the project. 
@@ -18,39 +27,73 @@ poetry install
 
 ### Fast setup
 1. Clone this repository in your machine.
-2. Navigate to the project folder on your local computer.
+   ```
+   git clone https://github.com/marlonleite/credit_recovery.git
+   ```
+2. Navigate to the project root folder.
 3. Download and install Docker.
+   <https://www.docker.com/products/docker-desktop>
 4. Go to the repository folder in your terminal and run:
 
 ```
 docker volume create --name=credit_database
 ```
-4. Run - It might take a while to finish:
+ and run:
    
 ```
 docker-compose up -d
+```
+stop docker:
+```
+docker-compose down
 ```
 5. Once the command is finished, run the following command to get the containers' ids:
 ``` 
 docker container ls
 ```
-6. Get the id of the postgres image and run the following command to enter in the container:
+OBS: You can drop and recreate `database` if build fails. 
+Run that cmds:
 ```
 docker-compose run --rm web bash
 ```
-7. Run the following two commands. Be aware that this command can fail sometimes because the database is currently being used by another images - such as the web container - and you need to stop these images.
 ```
-psql -h db -U postgres postgres -c "DROP DATABASE credit_db"
-psql -h db -U postgres postgres -c "CREATE DATABASE credit_db"
+psql -h db -U postgres postgres -c "DROP DATABASE postgres"
 ```
-8. Once the new database is created, run:.
 ```
-python manage.py migrate
-python manage.py collectstatic
+psql -h db -U postgres postgres -c "CREATE DATABASE postgres"
 ```
-9. Exit the container and make sure you are in the repository folder in the terminal.
-10. Kill container and rerun docker-compose again:
+Once the new database is created, run:
+```
+make migrate
+```
+```
+make create_admin
+```
+6. Exit the container and make sure you are in the repository folder in the terminal.
+7. Kill container and rerun docker-compose again:
+```
+docker-compose down
+```
 ```
 docker-compose up -d
 ```
-11. To stop the containers run the command: `docker-compose down`
+8. Good, go to Credit Recovery API url:
+```
+http://0.0.0.0:8000/
+```
+
+### Running the tests
+
+Some tests were done in the application.
+
+Run the follow command:
+```
+pytest
+```
+or
+```
+pytest path/app/test
+```
+
+### Author
+Marlon Leite - <https://github.com/marlonleite/>

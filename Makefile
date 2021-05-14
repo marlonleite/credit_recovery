@@ -18,17 +18,7 @@ black:
 black_reformat:
 	black --target-version py38 --verbose --exclude=venv .
 
-shell:
-	DEBUG=true python manage.py shell_plus
-
-create_db:
-	psql -h db -U postgres postgres -c "CREATE DATABASE credit_db"
-
-drop_db:
-	psql -h db -U postgres postgres -c "DROP DATABASE credit_db"
-
-migrate:
-	python manage.py migrate
-
 create_admin:
-	python manage.py createsuperuser
+	python manage.py shell -c "from django.contrib.auth.models import User; \
+                               User.objects.filter(username='admin').exists() or \
+                               User.objects.create_superuser('admin', 'admin@example.com', '123456')"

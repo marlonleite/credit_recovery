@@ -22,7 +22,13 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env.development
-    command: make runserver
+    command:
+      - /bin/bash
+      - -c
+      - |
+        python manage.py migrate
+        make create_admin
+        make runserver
     volumes:
       - .:/code
     ports:

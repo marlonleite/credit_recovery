@@ -34,9 +34,11 @@ urlpatterns = [
     path("", RedirectView.as_view(url="docs/", permanent=False), name="index"),
     path("api/", include("customers.urls")),
     path("api/", include("cases.urls")),
-    path("admin/", admin.site.urls),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.ENABLE_ADMIN:
+    urlpatterns.insert(0, path('admin/', admin.site.urls))

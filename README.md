@@ -84,7 +84,10 @@ http://0.0.0.0:8000/
 
 ### Running the tests
 
-Some tests were done in the application.
+Access the `bash docker web container`:
+```
+docker-compose run --rm web bash
+```
 
 Run the follow command:
 ```
